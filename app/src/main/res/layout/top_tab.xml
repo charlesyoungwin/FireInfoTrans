@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="horizontal"
+              android:layout_width="match_parent"
+              android:layout_height="45dp"
+              android:background="@color/colorPrimary">
+
+    <LinearLayout
+        android:id="@+id/real_time"
+        android:layout_width="0dp"
+        android:orientation="vertical"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/real_time"
+            android:textColor="@color/colorWhite"
+            android:layout_gravity="center"
+            />
+        <Button
+            android:id="@+id/button_real_time"
+            android:layout_width="wrap_content"
+            android:layout_height="5dp"
+            android:layout_gravity="center"
+            android:background="@color/colorPrimary"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/historic_data"
+        android:layout_width="0dp"
+        android:orientation="vertical"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/historic_data"
+            android:textColor="@color/colorWhite"/>
+        <Button
+            android:id="@+id/button_historic_data"
+            android:layout_width="wrap_content"
+            android:layout_height="5dp"
+            android:layout_gravity="center"
+            android:background="@color/colorPrimary"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/alarm_statistics"
+        android:layout_width="0dp"
+        android:orientation="vertical"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/alarm_statistics"
+            android:textColor="@color/colorWhite"/>
+        <Button
+            android:id="@+id/button_alarm_statistics"
+            android:layout_width="wrap_content"
+            android:layout_height="5dp"
+            android:layout_gravity="center"
+            android:background="@color/colorPrimary"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/link_device"
+        android:layout_width="0dp"
+        android:orientation="vertical"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/link_device"
+            android:textColor="@color/colorWhite"/>
+        <Button
+            android:id="@+id/button_link_device"
+            android:layout_width="wrap_content"
+            android:layout_height="5dp"
+            android:layout_gravity="center"
+            android:background="@color/colorPrimary"/>
+    </LinearLayout>
+
+</LinearLayout>

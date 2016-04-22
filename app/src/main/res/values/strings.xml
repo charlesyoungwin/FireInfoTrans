@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">FireInfoTrans</string>
+    <string name="action_settings">Settings</string>
+    <string name="real_time">实时数据</string>
+    <string name="historic_data">历史数据</string>
+    <string name="alarm_statistics">报警统计</string>
+    <string name="link_device">设备联动</string>
+</resources>
