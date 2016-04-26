@@ -3,13 +3,18 @@ package com.example.fireinfotrans;
 import android.graphics.Color;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+
+import com.example.fireinfotrans.UI.AlarmStatisticsFragment;
+import com.example.fireinfotrans.UI.HistoricalDataFragment;
+import com.example.fireinfotrans.UI.LinkDeviceFragment;
+import com.example.fireinfotrans.UI.RealTimeFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -74,7 +79,9 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         mFragments.add(mTab03);
         mFragments.add(mTab04);
 
-        mAdapter = new FragmentPagerAdapter(getSupportFragmentManager())
+        FragmentManager fm = getSupportFragmentManager();
+
+        mAdapter = new FragmentPagerAdapter(fm)
         {
 
             @Override

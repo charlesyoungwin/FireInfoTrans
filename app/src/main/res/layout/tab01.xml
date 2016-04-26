@@ -2,13 +2,35 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="match_parent"
+              android:layout_gravity="center">
 
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:gravity="center"
-        android:text="This is Tab1"
-        android:textSize="30sp"
-        android:textStyle="bold" />
+    <Button
+        android:id="@+id/button_pressure_node"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/button_pressure_node"
+        android:textSize="30sp"/>
+
+    <Button
+        android:id="@+id/button_power_node"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/button_power_node"
+        android:textSize="30sp"/>
+
+    <Button
+        android:id="@+id/button_switch_node"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/button_switch_node"
+        android:textSize="30sp"/>
+
+    <Button
+        android:id="@+id/button_cabinet_data"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/button_cabinet_data"
+        android:textSize="30sp"/>
+
 </LinearLayout>

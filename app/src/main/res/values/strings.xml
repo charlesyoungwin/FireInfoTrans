@@ -5,4 +5,10 @@
     <string name="historic_data">历史数据</string>
     <string name="alarm_statistics">报警统计</string>
     <string name="link_device">设备联动</string>
+    <string name="button_pressure_node">消防水压节点</string>
+    <string name="button_power_node">消防电源节点</string>
+    <string name="button_switch_node">消防开关量节点</string>
+    <string name="button_cabinet_data">消防控制柜数据</string>
+
+    <string name="text_link_device">此功能暂未开放</string>
 </resources>
