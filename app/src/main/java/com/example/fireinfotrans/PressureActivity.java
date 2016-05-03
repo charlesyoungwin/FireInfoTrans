@@ -9,9 +9,22 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-
+import com.example.fireinfotrans.db.FireInfoTransDB;
+import com.example.fireinfotrans.model.CabinetNode;
+import com.example.fireinfotrans.model.PowerNode;
 import com.example.fireinfotrans.model.PressureNode;
+import com.example.fireinfotrans.model.RealCabinet;
+import com.example.fireinfotrans.model.RealPower;
+import com.example.fireinfotrans.model.RealPressure;
+import com.example.fireinfotrans.model.RealSwitch;
+import com.example.fireinfotrans.model.SwitchNode;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,18 +35,24 @@ public class PressureActivity extends Activity {
 
     private List<PressureNode> mPressureNodeList = new ArrayList<PressureNode>();
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pressure);
+
         initPressureNodes();
+
         PressureAdapter adapter = new PressureAdapter(PressureActivity.this,
                 R.layout.activity_pressure_item,mPressureNodeList);
         ListView listView = (ListView) findViewById(R.id.list_pressure);
         listView.setAdapter(adapter);
     }
 
+
     public void initPressureNodes(){
+
        /* PressureNode node1 = new PressureNode(10011002,25);
         mPressureNodeList.add(node1);
         PressureNode node2 = new PressureNode(10011003,24);
@@ -80,4 +99,7 @@ public class PressureActivity extends Activity {
             return view;
         }
     }
+
+
+
 }

@@ -3,6 +3,7 @@ package com.example.fireinfotrans.db;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
 
 /**
  * Created by charlesyoung on 2016/4/26.
@@ -22,7 +23,7 @@ public class FireInfoTransOpenHelper extends SQLiteOpenHelper {
      * pressure_info建表语句
      */
     public static final String CREATE_PRESSURE_INFO = "create table pressure_info ("
-            + "id integer primary key,"
+            + "id integer,"
             + "data real,"
             + "type integer,"
             + "datetime text,"
@@ -42,7 +43,7 @@ public class FireInfoTransOpenHelper extends SQLiteOpenHelper {
      * power_info建表语句
      */
     public static final String CREATE_POWER_INFO = "create table power_info ("
-            + "id integer primary key,"
+            + "id integer,"
             + "a integer,"
             + "b integer,"
             + "c integer,"
@@ -64,7 +65,7 @@ public class FireInfoTransOpenHelper extends SQLiteOpenHelper {
      * switch_info建表语句
      */
     public static final String CREATE_SWITCH_INFO = "create table switch_info ("
-            + "id integer primary key,"
+            + "id integer,"
             + "state integer,"
             + "type integer,"
             + "datetime text)";
@@ -82,7 +83,7 @@ public class FireInfoTransOpenHelper extends SQLiteOpenHelper {
      * cabinet_info建表语句
      */
     public static final String CREATE_CABINET_INFO = "create table cabinet_info ("
-            + "id integer primary key,"
+            + "id integer,"
             + "type text,"
             + "bus_type text,"
             + "datetime text)";
@@ -97,10 +98,12 @@ public class FireInfoTransOpenHelper extends SQLiteOpenHelper {
             + "datetime text)";
 
 
+    private Context mContext;
 
     public FireInfoTransOpenHelper(Context context, String name,
                                    SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
+        mContext = context;
     }
 
     @Override
@@ -115,6 +118,7 @@ public class FireInfoTransOpenHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_REAL_S_INFO);
         db.execSQL(CREATE_CABINET_INFO);
         db.execSQL(CREATE_REAL_C_INFO);
+        Toast.makeText(mContext,"Create Succeeded",Toast.LENGTH_SHORT).show();
     }
 
     @Override
