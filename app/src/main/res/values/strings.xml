@@ -11,4 +11,59 @@
     <string name="button_cabinet_data">消防控制柜数据</string>
 
     <string name="text_link_device">此功能暂未开放</string>
+
+    <string name="pressure_id_1">10010001</string>
+    <string name="pressure_id_2">10010002</string>
+    <string name="pressure_id_3">10010003</string>
+    <string name="pressure_id_4">10010004</string>
+    <string name="pressure_id_5">10010005</string>
+    <string name="pressure_id_6">10010006</string>
+    <string name="pressure_id_7">10010007</string>
+    <string name="pressure_id_8">10010008</string>
+    <string name="pressure_id_9">10010101</string>
+    <string name="pressure_id_10">10010201</string>
+    <string name="pressure_id_11">10010202</string>
+    <string name="pressure_id_12">10010301</string>
+    <string name="pressure_id_13">10010401</string>
+    <string name="pressure_id_14">10010402</string>
+    <string name="pressure_id_15">10010501</string>
+    <string name="pressure_id_16">10010502</string>
+
+    <string name="pressure_location_1">地下室喷淋末端西北</string>
+    <string name="pressure_location_2">地下室喷淋末端东南</string>
+    <string name="pressure_location_3">地下室水泵房喷淋泵</string>
+    <string name="pressure_location_4">地下室水泵房水炮泵</string>
+    <string name="pressure_location_5">地下室水泵房雨淋泵</string>
+    <string name="pressure_location_6">地下室水泵房</string>
+    <string name="pressure_location_7">地下室水泵房</string>
+    <string name="pressure_location_8">地下室水泵房</string>
+    <string name="pressure_location_9">一楼喷淋末端东南</string>
+    <string name="pressure_location_10">二楼喷淋末端东南</string>
+    <string name="pressure_location_11">二楼喷淋末端西南</string>
+    <string name="pressure_location_12">三楼喷淋末端东南</string>
+    <string name="pressure_location_13">四楼喷淋末端东南</string>
+    <string name="pressure_location_14">四楼北露台</string>
+    <string name="pressure_location_15">五楼喷淋末端东南</string>
+    <string name="pressure_location_16">五楼消防栓东南</string>
+
+    <string name="power_id_1">40010001</string>
+    <string name="power_id_2">40010002</string>
+    <string name="power_id_3">40010003</string>
+    <string name="power_id_4">40010004</string>
+    <string name="power_id_5">40010005</string>
+    <string name="power_id_6">40010006</string>
+    <string name="power_id_7">40010007</string>
+    <string name="power_id_8">40010008</string>
+    <string name="power_id_9">40010009</string>
+
+    <string name="power_name_1">泵房电源一</string>
+    <string name="power_name_2">泵房电源二</string>
+    <string name="power_name_3">泵房电源三</string>
+    <string name="power_name_4">泵房电源四</string>
+    <string name="power_name_5">泵房电源五</string>
+    <string name="power_name_6">泵房电源六</string>
+    <string name="power_name_7">泵房电源七</string>
+    <string name="power_name_8">泵房电源八</string>
+    <string name="power_name_9">泵房电源九</string>
+
 </resources>

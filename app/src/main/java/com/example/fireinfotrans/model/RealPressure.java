@@ -11,6 +11,18 @@ public class RealPressure {
     private String mPressureDatetime;
     private int mPressureState;
 
+    public RealPressure(){
+        super();
+    }
+
+    public RealPressure(int pressureId, double pressureData, int pressureType, String pressureDatetime, int pressureState) {
+        mPressureId = pressureId;
+        mPressureData = pressureData;
+        mPressureType = pressureType;
+        mPressureDatetime = pressureDatetime;
+        mPressureState = pressureState;
+    }
+
     public int getPressureId() {
         return mPressureId;
     }

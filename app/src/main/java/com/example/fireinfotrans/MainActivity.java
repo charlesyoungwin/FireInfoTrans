@@ -45,7 +45,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
         initEvent();
 
-        setSelect(1);
+        setSelect(0);
     }
 
     private void initEvent(){

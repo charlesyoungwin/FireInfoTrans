@@ -12,6 +12,18 @@ public class RealPower {
     private String mPowerDateTime;
     private int mPowerState;
 
+    public RealPower(){
+        super();
+    }
+    public RealPower(int powerId, int powerA, int powerB, int powerC, String powerDateTime, int powerState) {
+        mPowerId = powerId;
+        mPowerA = powerA;
+        mPowerB = powerB;
+        mPowerC = powerC;
+        mPowerDateTime = powerDateTime;
+        mPowerState = powerState;
+    }
+
     public int getPowerId() {
         return mPowerId;
     }

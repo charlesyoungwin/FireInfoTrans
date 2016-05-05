@@ -96,6 +96,24 @@ public class FireInfoTransDB {
     }
 
     /**
+     * 查询压力节点数据办法
+     */
+    public RealPressure queryPressureNode(int id){
+
+        Cursor cursor = db.query("real_p_info",new String[]{"id","data",
+            "type","datetime","state"},"id = ?",new String[]{String.valueOf(id)},
+                null,null,null);
+        if(cursor.moveToNext()){
+            return new RealPressure(cursor.getInt(0),cursor.getDouble(1),cursor.getInt(2),
+                    cursor.getString(3),cursor.getInt(4));
+        }
+        cursor.close();
+        return null;
+    }
+
+
+
+    /**
      * 存储PowerNode实例到数据库
      */
     public void savePowerNode(PowerNode powerNode){
@@ -128,6 +146,22 @@ public class FireInfoTransDB {
             db.update("real_w_info",values,"id = ?",
                     new String[]{String.valueOf(realPower.getPowerId())});
         }
+    }
+
+    /**
+     * 查询PowerNode节点数据
+     */
+    public RealPower queryPowerNode(int id){
+
+        Cursor cursor = db.query("real_w_info", new String[]{"id","a","b","c","datetime","state"},
+                "id = ?",new String[]{String.valueOf(id)},null,null,null);
+        if(cursor.moveToNext()){
+            return new RealPower(cursor.getInt(0),cursor.getInt(1),cursor.getInt(2),
+                    cursor.getInt(3),cursor.getString(4),cursor.getInt(5));
+        }
+        cursor.close();
+        return null;
+
     }
 
     /**

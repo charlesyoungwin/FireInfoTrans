@@ -20,6 +20,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".PressureActivity"/>
+        <activity android:name=".PowerActivity"/>
+        <activity android:name=".SwitchActivity"/>
     </application>
 
 </manifest>
