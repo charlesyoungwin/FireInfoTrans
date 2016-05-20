@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="node">
+        <item>消防压力</item>
+        <item>消防开关量</item>
+        <item>消防电源</item>
+        <item>消防控制柜</item>
+    </string-array>
+</resources>

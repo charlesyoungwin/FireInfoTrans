@@ -32,6 +32,7 @@ import com.example.fireinfotrans.model.SwitchNode;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.InetAddress;
@@ -162,7 +163,7 @@ public class RealTimeFragment extends Fragment implements View.OnClickListener{
             while (!Thread.currentThread().isInterrupted()) {
 
                 try {
-                    socket = mServerSocket.accept();
+                    socket = mServerSocket.accept();//开启监听
                     CommunicationThread communicationThread =
                             new CommunicationThread(socket);
                     new Thread(communicationThread).start();
@@ -183,8 +184,9 @@ public class RealTimeFragment extends Fragment implements View.OnClickListener{
         public CommunicationThread(Socket clientSocket) {
             this.clientSocket = clientSocket;
             try {
-                this.input = new BufferedReader(new
-                        InputStreamReader(this.clientSocket.getInputStream()));
+                InputStream recvStream;
+                recvStream = this.clientSocket.getInputStream();
+                this.input = new BufferedReader(new InputStreamReader(recvStream));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -200,13 +202,13 @@ public class RealTimeFragment extends Fragment implements View.OnClickListener{
                     // String content = input.readLine();
 
                     //StringBuilder stringBuilder = new StringBuilder();
+                   // stringBuilder.append("");
                     String line = input.readLine();
-                    //  while (line != null) {
-                    //stringBuilder.append(line);
-
+                   // while (line != null) {
+                    //    stringBuilder.append(line);
                     //}
 
-                    //String content = stringBuilder.toString();
+                   // String content = stringBuilder.toString();
 
                     String content = line;
                     updateConnversationHandler.post(new updateUIThread(content));
@@ -218,8 +220,7 @@ public class RealTimeFragment extends Fragment implements View.OnClickListener{
                     if(content != null){
                         checkReadData(content);
                     }
-
-
+                    //stringBuilder.delete(0,stringBuilder.length());
 
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -426,7 +427,7 @@ public class RealTimeFragment extends Fragment implements View.OnClickListener{
             }
             if (bus_type == 00) {
                 c_bus_type = "CAN";
-            } else if (bus_type == 00) {
+            } else if (bus_type == 16) {
                 c_bus_type = "Switch";
             }
 

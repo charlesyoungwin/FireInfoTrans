@@ -66,4 +66,8 @@
     <string name="power_name_8">泵房电源八</string>
     <string name="power_name_9">泵房电源九</string>
 
+    <string name="fire_pressure">消防压力</string>
+    <string name="fire_power">消防电源</string>
+    <string name="fire_switch">消防开关量</string>
+    <string name="fire_cabinet">消防控制柜</string>
 </resources>
