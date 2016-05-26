@@ -96,7 +96,7 @@ public class FireInfoTransDB {
     }
 
     /**
-     * 查询压力节点数据办法
+     * 查询压力节点数据方法
      */
     public RealPressure queryPressureNode(int id){
 

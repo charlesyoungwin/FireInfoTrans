@@ -54,6 +54,7 @@ public class RealTimeFragment extends Fragment implements View.OnClickListener{
 
     Thread serverThread = null;
     private ServerSocket mServerSocket;
+    private Socket socket = null;
     private static final int PORT = 6000;
     Handler updateConnversationHandler;
     private FireInfoTransDB mFireInfoTransDB;
@@ -75,7 +76,7 @@ public class RealTimeFragment extends Fragment implements View.OnClickListener{
     public void onStop() {
         super.onStop();
         try{
-            mServerSocket.close();
+            //mServerSocket.close();
         } catch (Exception e){
             e.printStackTrace();
         }
@@ -154,7 +155,6 @@ public class RealTimeFragment extends Fragment implements View.OnClickListener{
         @Override
         public void run() {
 
-            Socket socket = null;
             try {
                 mServerSocket = new ServerSocket(PORT);
             } catch (IOException e) {
@@ -164,10 +164,11 @@ public class RealTimeFragment extends Fragment implements View.OnClickListener{
 
                 try {
                     socket = mServerSocket.accept();//开启监听
-                    CommunicationThread communicationThread =
-                            new CommunicationThread(socket);
-                    new Thread(communicationThread).start();
-
+                    if(socket != null) {
+                        CommunicationThread communicationThread =
+                                new CommunicationThread(socket);
+                        new Thread(communicationThread).start();
+                    }
 
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -213,8 +214,8 @@ public class RealTimeFragment extends Fragment implements View.OnClickListener{
                     String content = line;
                     updateConnversationHandler.post(new updateUIThread(content));
 
-                    //Thread clientThread = new Thread(new ClientThread(content));
-                    //clientThread.start();
+                   // Thread clientThread = new Thread(new ClientThread(content));
+                   // clientThread.start();
 
                     //Log.d("content",content);
                     if(content != null){
