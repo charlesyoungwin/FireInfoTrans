@@ -70,7 +70,7 @@ public class FireInfoTransDB {
             ContentValues values = new ContentValues();
             values.put("id",pressureNode.getPressureId());
             values.put("data",pressureNode.getPressureData());
-            values.put("type",pressureNode.getPressureDatetime());
+            values.put("type",pressureNode.getPressureType());
             values.put("datetime",pressureNode.getPressureDatetime());
             values.put("state",pressureNode.getPressureState());
             db.insert("pressure_info",null,values);

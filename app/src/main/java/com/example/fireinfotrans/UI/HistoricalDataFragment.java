@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,11 +25,14 @@ import android.widget.Toast;
 import com.example.fireinfotrans.R;
 import com.example.fireinfotrans.db.FireInfoTransDB;
 import com.example.fireinfotrans.db.FireInfoTransOpenHelper;
+import com.example.fireinfotrans.model.PowerNode;
+import com.example.fireinfotrans.model.PressureNode;
 import com.example.fireinfotrans.model.RealPower;
 import com.example.fireinfotrans.model.RealPressure;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 /**
@@ -50,6 +54,7 @@ public class HistoricalDataFragment extends Fragment {
     private SQLiteDatabase db;
     public static final String DB_NAME = "fire_info_trans";
     public static final int VERSION = 1;
+    public EditText textNodeNumber;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -66,7 +71,7 @@ public class HistoricalDataFragment extends Fragment {
         View v = inflater.inflate(R.layout.tab02,container,false);
         //初始化控件
         Spinner spinner = (Spinner) v.findViewById(R.id.spinner_node);
-        final EditText textNodeNumber = (EditText) v.findViewById(R.id.text_node_number);
+        textNodeNumber = (EditText) v.findViewById(R.id.text_node_number);
         Button buttonQuery = (Button) v.findViewById(R.id.button_query);
         textHistoric = (TextView) v.findViewById(R.id.text_historic);
 
@@ -86,7 +91,7 @@ public class HistoricalDataFragment extends Fragment {
         timePicker.setIs24HourView(true);
         Calendar c = Calendar.getInstance();
         year = c.get(Calendar.YEAR);
-        month = c.get(Calendar.MONTH);
+        month = c.get(Calendar.MONTH) ;
         day = c.get(Calendar.DAY_OF_MONTH);
         hour = c.get(Calendar.HOUR);
         minute = c.get(Calendar.MINUTE);
@@ -99,7 +104,7 @@ public class HistoricalDataFragment extends Fragment {
                     , int month, int day)
             {
                 HistoricalDataFragment.this.year = year;
-                HistoricalDataFragment.this.month = month;
+                HistoricalDataFragment.this.month = month + 1;
                 HistoricalDataFragment.this.day = day;
                 // 显示当前日期、时间
             }
@@ -119,17 +124,58 @@ public class HistoricalDataFragment extends Fragment {
         });
         Log.w("TAG","test");
         //选择节点的节点号
-        nodeNumber = textNodeNumber.getText().toString();
+
         buttonQuery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(),"click",Toast.LENGTH_SHORT).show();
                 Log.w("TAG","click");
-                RealPressure realPressure = new RealPressure();
-                realPressure = (RealPressure) queryDatabase(node,nodeNumber,year,month,day,hour,minute);
-                if(realPressure != null) {
-                    textHistoric.setText(String.valueOf(realPressure.getPressureId()));
+                nodeNumber = textNodeNumber.getText().toString();
+                textHistoric.setText("");
+                switch (node){
+                    case "消防压力":
+                        ArrayList<PressureNode> pressureNodeArrayList = new ArrayList<PressureNode>();
+                        pressureNodeArrayList = (ArrayList<PressureNode>) queryDatabase(node,nodeNumber,year,month,day,hour,minute);
+                        if(pressureNodeArrayList != null) {
+                            for(PressureNode pressureNode : pressureNodeArrayList){
+                                textHistoric.append(String.valueOf(pressureNode.getPressureId()) + "    " +
+                                        String.valueOf(pressureNode.getPressureData()) + "   " +
+                                        String.valueOf(pressureNode.getPressureType()) + "   " +
+                                        String.valueOf(pressureNode.getPressureDatetime()) + "   " +
+                                        String.valueOf(pressureNode.getPressureState())
+                                );
+                                textHistoric.append("\n");
+                                Log.w("TAG",String.valueOf(pressureNode.getPressureData()));
+                            }
+                        }
+                        break;
+                    case "消防电源":
+                        ArrayList<PowerNode> powerNodeArrayList = new ArrayList<PowerNode>();
+                        powerNodeArrayList = (ArrayList<PowerNode>) queryDatabase(node,nodeNumber,year,month,day,hour,minute);
+                        if(powerNodeArrayList != null){
+                            for(PowerNode powerNode : powerNodeArrayList){
+                                textHistoric.append(String.valueOf(powerNode.getPowerId())+"    "+
+                                        String.valueOf(powerNode.getPowerA())+  "   " +
+                                        String.valueOf(powerNode.getPowerB())+ "   "  +
+                                        String.valueOf(powerNode.getPowerC()) + "   " +
+                                        String.valueOf(powerNode.getPowerDateTime()) + "    " +
+                                        String.valueOf(powerNode.getPowerState())
+                                );
+                                textHistoric.append("\n");
+                            }
+
+                        }
+                        break;
+                    case "消防开关量":
+
+                        break;
+                    case "消防控制柜":
+
+                        break;
+
+                    default:
+                        break;
                 }
+
             }
         });
 
@@ -139,64 +185,121 @@ public class HistoricalDataFragment extends Fragment {
 
     public Object queryDatabase(String node,String num,int yearNode,
                               int monthNode, int dayNode, int hourNode, int minuteNode) {
-        Log.w("TAG","before switch");
+
+        String yearNodeString, monthNodeString, dayNodeString, hourNodeString, minuteNodeString;
+        String hourNodeString2;
+        int hourNode2 = hourNode + 1;
+        yearNodeString = String.valueOf(yearNode);
+        if (monthNode < 10) {
+            monthNodeString = "0" + String.valueOf(monthNode);
+        } else {
+            monthNodeString = String.valueOf(monthNode);
+        }
+        if (dayNode < 10) {
+            dayNodeString = "0" + String.valueOf(dayNode);
+        } else {
+            dayNodeString = String.valueOf(dayNode);
+        }
+        if (hourNode < 10) {
+            hourNodeString = "0" + String.valueOf(hourNode);
+        } else {
+            hourNodeString = String.valueOf(hourNode);
+        }
+        if (hourNode2 < 10) {
+            hourNodeString2 = "0" + String.valueOf(hourNode2);
+        } else {
+            hourNodeString2 = String.valueOf(hourNode2);
+        }
+        if (minuteNode < 10) {
+            minuteNodeString = "0" + String.valueOf(minuteNode);
+        } else {
+            minuteNodeString = String.valueOf(minuteNode);
+        }
+        String timeInput = yearNodeString + "-" + monthNodeString + "-" + dayNodeString + " "
+                + hourNodeString + ":" + minuteNodeString + ":" + "00";
+        String timeEnd = yearNodeString + "-" + monthNodeString + "-" + dayNodeString + " "
+                + hourNodeString2 + ":" + minuteNodeString + ":" + "00";
+        Log.w("TAG","timeInput"+timeInput);
+        Log.w("TAG","timeEnd"+timeEnd);
         switch (node) {
             case "消防压力":
-                String yearNodeString, monthNodeString, dayNodeString, hourNodeString, minuteNodeString;
-                String hourNodeString2;
-                int hourNode2 = hourNode + 1;
-                yearNodeString = String.valueOf(yearNode);
-                if (monthNode < 10) {
-                    monthNodeString = "0" + String.valueOf(monthNode);
-                } else {
-                    monthNodeString = String.valueOf(monthNode);
-                }
-                if (dayNode < 10) {
-                    dayNodeString = "0" + String.valueOf(dayNode);
-                } else {
-                    dayNodeString = String.valueOf(dayNode);
-                }
-                if (hourNode < 10) {
-                    hourNodeString = "0" + String.valueOf(hourNode);
-                } else {
-                    hourNodeString = String.valueOf(hourNode);
-                }
-                if (hourNode2 < 10) {
-                    hourNodeString2 = "0" + String.valueOf(hourNode2);
-                } else {
-                    hourNodeString2 = String.valueOf(hourNode2);
-                }
-                if (minuteNode < 10) {
-                    minuteNodeString = "0" + String.valueOf(minuteNode);
-                } else {
-                    minuteNodeString = String.valueOf(minuteNode);
-                }
-                String timeInput = yearNodeString + "-" + monthNodeString + "-" + dayNodeString + " "
-                        + hourNodeString + ":" + minuteNodeString + ":" + "00";
-                String timeEnd = yearNodeString + "-" + monthNodeString + "-" + dayNodeString + " "
-                        + hourNodeString2 + ":" + minuteNodeString + ":" + "00";
-                Log.w("TAG",timeInput);
-                if (num == null) {
-                    Cursor cursor1 = db.rawQuery("select * from pressure_info where DATETIME(datetime) > ? and" +
-                            " DATETIME(datetime) < ?", new String[]{timeInput, timeEnd});
-                    while (cursor1.moveToNext()) {
-                        RealPressure realPressure1 = new RealPressure(cursor1.getInt(0),cursor1.getDouble(1),cursor1.getInt(2),
-                                cursor1.getString(3),cursor1.getInt(4));
-                        Log.w("TAG",realPressure1.getPressureDatetime());
-                        return realPressure1;
-
+                ArrayList<PressureNode> pressureList = new ArrayList<PressureNode>();
+                if (TextUtils.isEmpty(num)) {
+                    Log.w("TAG","cursor begin1");
+                    Cursor cursor1 = db.rawQuery("select * from pressure_info where datetime between ? and ? ",
+                            new String[]{timeInput, timeEnd});
+                    Log.w("TAG","cursor succeed1");
+                    if(cursor1.moveToFirst()){
+                         do{
+                             PressureNode pressureNode = new PressureNode( cursor1.getInt(0), cursor1.getDouble(1),
+                                     cursor1.getInt(2), cursor1.getString(3),cursor1.getInt(4));
+                             pressureList.add(pressureNode);
+                         }
+                         while(cursor1.moveToNext());
+                        return pressureList;
                     }
+                    cursor1.close();
                 } else {
-                    Cursor cursor2 = db.rawQuery("select * from pressure_info where DATETIME(datetime) > ? and " +
-                            "DATETIME(datetime) < ? and id = ?", new String[]{timeInput, timeEnd, num});
-                    while(cursor2.moveToNext()){
-                        RealPressure realPressure2 = new RealPressure(cursor2.getInt(0),cursor2.getDouble(1),cursor2.getInt(2),
-                                cursor2.getString(3),cursor2.getInt(4));
-                        return realPressure2;
+                    Log.w("TAG","cursor begin2");
+                    //Cursor cursor2 = db.rawQuery("select * from pressure_info where datetime > ? and " +
+                    //      "datetime < ? and id = ?", new String[]{timeInput, timeEnd, num});
+                    Log.w("TAG","cursor succeed2");
+                    Cursor cursor2 = db.rawQuery("select * from pressure_info where datetime between ? and ?"+
+                            "and id = ?", new String[]{timeInput, timeEnd,num});
+                    if(cursor2.moveToFirst()){
+                        do{
+                            PressureNode pressureNode = new PressureNode( cursor2.getInt(0), cursor2.getDouble(1),
+                                    cursor2.getInt(2), cursor2.getString(3),cursor2.getInt(4));
+                            pressureList.add(pressureNode);
+                        }
+                        while(cursor2.moveToNext());
+                        return pressureList;
                     }
-
+                    cursor2.close();
                 }
                 break;
+
+            case "消防电源":
+                ArrayList<PowerNode> powerList = new ArrayList<PowerNode>();
+                if(TextUtils.isEmpty(num)){
+
+                    Cursor cursor1 = db.rawQuery("select * from power_info where datetime between ? and ? ",
+                            new String[]{timeInput, timeEnd});
+                    if(cursor1.moveToFirst()){
+                        do{
+                            PowerNode powerNode = new PowerNode(cursor1.getInt(0),cursor1.getInt(1),cursor1.getInt(2),
+                                    cursor1.getInt(3),cursor1.getString(4),cursor1.getInt(5));
+                            powerList.add(powerNode);
+                        }
+                        while (cursor1.moveToNext());
+                        return powerList;
+                    }
+                    cursor1.close();
+                } else{
+
+                    Cursor cursor2 = db.rawQuery("select * from power_info where datetime between ? and ? "+
+                            "and id = ?", new String[]{timeInput, timeEnd, num});
+                    if(cursor2.moveToFirst()){
+                        do{
+                            PowerNode powerNode = new PowerNode(cursor2.getInt(0),cursor2.getInt(1),cursor2.getInt(2),
+                                    cursor2.getInt(3),cursor2.getString(4),cursor2.getInt(5));
+                            powerList.add(powerNode);
+                        }
+                        while(cursor2.moveToNext());
+                        return powerList;
+                    }
+                    cursor2.close();
+                }
+                break;
+
+            case "消防开关量":
+
+                break;
+
+            case "消防控制柜":
+
+                break;
+
             default:
                 break;
         }
@@ -210,7 +313,6 @@ public class HistoricalDataFragment extends Fragment {
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
             String[] nodeList = getResources().getStringArray(R.array.node);
             node = nodeList[position];
-            Toast.makeText(getActivity(),node,Toast.LENGTH_SHORT).show();
         }
 
         @Override

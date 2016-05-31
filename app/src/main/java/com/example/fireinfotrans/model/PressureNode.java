@@ -12,6 +12,18 @@ public class PressureNode {
     private int mPressureState;
 
 
+    public PressureNode(){
+        super();
+    }
+
+    public PressureNode(int pressureId, double pressureData, int pressureType, String pressureDatetime, int pressureState) {
+        mPressureId = pressureId;
+        mPressureData = pressureData;
+        mPressureType = pressureType;
+        mPressureDatetime = pressureDatetime;
+        mPressureState = pressureState;
+    }
+
     public int getPressureId() {
         return mPressureId;
     }

@@ -4,11 +4,87 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:gravity="center"
-        android:text="This is  Tab3"
-        android:textSize="30sp"
-        android:textStyle="bold" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Spinner
+            android:id="@+id/spinner_node"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1">
+        </Spinner>
+        <EditText
+            android:id="@+id/text_node_number"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="请输入节点号"/>
+        <Button
+            android:id="@+id/button_query"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="查询"/>
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="请选择日期和时间,查询时间为1小时以内"
+            android:layout_gravity="center_horizontal"/>
+
+        <!-- 定义一个DatePicker组件 -->
+        <DatePicker android:id="@+id/datePicker"
+                    android:layout_width="wrap_content"
+                    android:layout_height="100dp"
+                    android:startYear="2000"
+                    android:endYear="2050"
+                    android:layout_gravity="center_horizontal"
+                    android:calendarViewShown="false"
+                    android:spinnersShown="true"
+                    android:datePickerMode="spinner"
+            />
+        <!-- 定义一个TimePicker组件 -->
+        <TimePicker android:id="@+id/timePicker"
+                    android:layout_width="wrap_content"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center_horizontal"
+                    android:timePickerMode="spinner"
+            />
+    </LinearLayout>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/text_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="报警信息统计： "
+                android:layout_gravity="center"/>
+            <TextView
+                android:id="@+id/text_historic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+
+    </ScrollView>
 </LinearLayout>

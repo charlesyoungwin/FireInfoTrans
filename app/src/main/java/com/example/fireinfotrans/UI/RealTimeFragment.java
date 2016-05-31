@@ -312,7 +312,6 @@ public class RealTimeFragment extends Fragment implements View.OnClickListener{
                 realPressure.setPressureState(pr_state);
                 mFireInfoTransDB.updatePressureNode(realPressure);
 
-
                 break;
             case '2':              //开关量节点信息（暂时还没有）
                 //数据解析
